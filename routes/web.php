@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\drinksController;
 use App\Http\Controllers\Admin\foodsController;
+use App\Http\Controllers\Auth\usersController;
+use App\Http\Controllers\Admin\employeesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,13 +17,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Log
-Route::get('/', function () {
-    return view('auth.masukRestoran');
-});
-Route::get('/lupaPasswordRestoran', function () {
-    return view('auth.lupaPAsswordRestoran');
-});
+// Auth
+Route::get('/', [usersController::class, 'formLogin'])->name('formMasuk');
+Route::post('/masuk', [usersController::class, 'login'])->name('masuk');
+Route::get('/keluar', [usersController::class, 'logout'])->name('keluar');
+Route::get('/FormLupaPassword', [usersController::class, 'formForgotPassword'])->name('formLupaPassword');
 
 // ==========================================================================
 
@@ -43,19 +42,13 @@ Route::get('/Dashboard', [dashboardController::class, 'index'])->name('dashboard
 
 // DAta Kasir
 // --read--
-Route::get('/readDataKasir', function () {
-    return view('admin.pages.Kasir.readDataKasir');
-});
+Route::get('/DataKasir', [employeesController::class, 'index'])->name('indexDataKasir');
 // --create--
-Route::get('/createDataKasir', function () {
-    return view('admin.pages.Kasir.createDataKasir');
-});
+Route::get('/FormDataKasirBaru', [employeesController::class, 'create'])->name('createDataKasir');
+Route::post('/TambahDataKasirBaru', [employeesController::class, 'store'])->name('storeDataKasir');
 // --update--
 // --delete--
 // --show--
-Route::get('/showDataKasir', function () {
-    return view('admin.pages.Kasir.showDataKasir');
-});
 // End Data Kasir
 
 // Data Makanan

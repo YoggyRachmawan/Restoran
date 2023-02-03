@@ -22,14 +22,15 @@
                                 <h5 class="card-title">Form Data Kasir Baru</h5>
                             </div>
                             <div class="col-1 ml-auto text-right">
-                                <a type="button" href="/readDataKasir" class="btn btn-sm" title="Tutup">
+                                <a type="button" href="{{ route('indexDataKasir') }}" class="btn btn-sm" title="Tutup">
                                     <i class="bi bi-x-square"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <form>
+                    <form action="{{ route('storeDataKasir') }}" method="POST">
+                        @csrf
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -69,7 +70,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <h6>Email</h6>
-                                        <input type="email" class="form-control">
+                                        <input type="email" name="email" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -93,15 +94,16 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <h6>Password</h6>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
-                                        <small id="emailHelp" class="form-text text-muted">Password minimal 8
+                                        <input type="password" name="password" class="form-control" autocomplete="off">
+                                        <small class="form-text text-muted">Password minimal 8
                                             karakter.</small>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <h6>Konfirmasi Password</h6>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            autocomplete="off">
                                     </div>
                                 </div>
                             </div>

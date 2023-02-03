@@ -20,7 +20,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6">
-                                <a type="button" href="/createDataKasir" class="btn btn-sm btn-secondary">
+                                <a type="button" href="{{ route('createDataKasir') }}" class="btn btn-sm btn-secondary">
                                     <i class="bi bi-plus-lg"></i>
                                     Tamabah Data Kasir
                                 </a>

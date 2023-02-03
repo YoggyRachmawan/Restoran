@@ -45,18 +45,18 @@
                     </div>
                 </form>
                 <p class="mb-1">
-                    Ingat password ? <a href="/">Coba masuk.</a>
+                    Ingat password ? <a href="{{ route('formMasuk') }}">Coba masuk.</a>
                 </p>
             </div>
         </div>
     </div>
 
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE -->
+    <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 </body>
 
 </html>

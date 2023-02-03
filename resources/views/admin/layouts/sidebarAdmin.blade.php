@@ -22,7 +22,8 @@
                 {{-- Kasir --}}
                 <li class="nav-header">Kasir</li>
                 <li class="nav-item mb-3">
-                    <a href="/readDataKasir" class="nav-link {{ request()->is('readDataKasir') ? 'active' : '' }}">
+                    <a href="{{ route('indexDataKasir') }}"
+                        class="nav-link {{ request()->is('indexDataKasir') ? 'active' : '' }}">
                         <i class="nav-icon fas bi bi-people"></i>
                         <p>
                             Data Kasir

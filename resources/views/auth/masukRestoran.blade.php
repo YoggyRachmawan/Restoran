@@ -21,6 +21,8 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
+        <h3>Email : yoggy@resto.com</h3>
+        <h3>Password : 12345678</h3>
         <div class="card card-outline card-secondary">
             <div class="card-header text-center">
                 <h1 class="bi bi-houses-fill mt-2"> Restoran</h1>
@@ -28,9 +30,11 @@
             <div class="card-body">
                 <p class="login-box-msg">Selamat datang kembali.</p>
 
-                <form action="" method="post">
+                <form action="{{ route('masuk') }}" method="POST">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" name="email"
+                            autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -38,7 +42,8 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="password"
+                            autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -56,24 +61,24 @@
                         </div>
                     </div>
                     <div class="social-auth-links text-center mt-2 mb-3">
-                        <a href="{{ route('dashboard') }}" class="btn btn-block btn-secondary">
+                        <button type="submit" class="btn btn-block btn-secondary">
                             Masuk
-                        </a>
+                        </button>
                     </div>
                 </form>
                 <p class="mb-1">
-                    Lupa password ? <a href="/lupaPasswordRestoran">Coba disini.</a>
+                    Lupa password ? <a href="{{ route('formLupaPassword') }}">Coba disini.</a>
                 </p>
             </div>
         </div>
     </div>
 
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE -->
+    <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 </body>
 
 </html>

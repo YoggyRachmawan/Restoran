@@ -21,7 +21,7 @@
                     <i class="bi bi-file-lock-fill"></i> Ganti password
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="/" class="dropdown-item">
+                <a href="{{ route('keluar') }}" class="dropdown-item">
                     <i class="bi bi-door-open-fill"></i> Keluar
                 </a>
             </div>
