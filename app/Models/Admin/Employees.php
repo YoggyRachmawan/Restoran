@@ -9,6 +9,5 @@ class Employees extends Model
 {
     use HasFactory;
     protected $table = 'employees';
-    protected $dates = ['created_at', 'updated_at'];
     protected $guarded = [];
 }

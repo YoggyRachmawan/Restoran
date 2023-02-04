@@ -23,7 +23,7 @@
                                 <h5 class="card-title">Form Ubah Data Profil</h5>
                             </div>
                             <div class="col-1 ml-auto text-right">
-                                <a type="button" href="/readProfilAdmin" class="btn btn-sm" title="Tutup">
+                                <a type="button" href="{{ route('indexProfilAdmin') }}" class="btn btn-sm" title="Tutup">
                                     <i class="bi bi-x-square"></i>
                                 </a>
                             </div>

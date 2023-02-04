@@ -25,21 +25,22 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <form>
+                    <form action="{{ route('gantiPasswordAdmin') }}" method="POST">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="form-group">
                                     <h6>Password Saat Ini</h6>
-                                    <input type="text" class="form-control">
+                                    <input type="password" class="form-control" name="passwordSaatIni">
                                 </div>
                                 <div class="form-group">
                                     <h6>Password Baru</h6>
-                                    <input type="text" class="form-control">
+                                    <input type="password" class="form-control" name="password">
                                     <small id="emailHelp" class="form-text text-muted">Password minimal 8 karakter.</small>
                                 </div>
                                 <div class="form-group">
                                     <h6>Konfirmasi Password Baru</h6>
-                                    <input type="text" class="form-control">
+                                    <input type="password" class="form-control" name="password_confirmation">
                                 </div>
                             </div>
                         </div>

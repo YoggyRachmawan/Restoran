@@ -23,7 +23,7 @@
                 <li class="nav-header">Kasir</li>
                 <li class="nav-item mb-3">
                     <a href="{{ route('indexDataKasir') }}"
-                        class="nav-link {{ request()->is('indexDataKasir') ? 'active' : '' }}">
+                        class="nav-link {{ request()->is('DataKasir', 'FormDataKasirBaru') ? 'active' : '' }}">
                         <i class="nav-icon fas bi bi-people"></i>
                         <p>
                             Data Kasir
@@ -53,7 +53,8 @@
                 {{-- Laporan --}}
                 <li class="nav-header">Laporan</li>
                 <li class="nav-item mb-3">
-                    <a href="/readDataLaporan" class="nav-link {{ request()->is('readDataLaporan') ? 'active' : '' }}">
+                    <a href="{{ route('indexDataLaporan') }}"
+                        class="nav-link {{ request()->is('DataLaporan') ? 'active' : '' }}">
                         <i class="nav-icon fas bi bi-clipboard2"></i>
                         <p>
                             Data Laporan

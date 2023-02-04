@@ -12,12 +12,13 @@
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                 <span class="dropdown-header">Admin | Yoggy Rachmawan</span>
                 <div class="dropdown-divider"></div>
-                <a href="/readProfilAdmin"
-                    class="dropdown-item {{ request()->is('readProfilAdmin', 'updateProfilAdmin') ? 'active' : '' }}">
+                <a href="{{ route('indexProfilAdmin') }}"
+                    class="dropdown-item {{ request()->is('ProfilAdmin', 'FormEditProfilAdmin') ? 'active' : '' }}">
                     <i class="bi bi-person-lines-fill"></i> Profil saya
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="/passwordAdmin" class="dropdown-item {{ request()->is('passwordAdmin') ? 'active' : '' }}">
+                <a href="{{ route('formGantiPasswordAdmin') }}"
+                    class="dropdown-item {{ request()->is('FormGantiPassword') ? 'active' : '' }}">
                     <i class="bi bi-file-lock-fill"></i> Ganti password
                 </a>
                 <div class="dropdown-divider"></div>

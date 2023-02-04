@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Employees;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class usersController extends Controller
 {
@@ -15,18 +18,38 @@ class usersController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($validated)) {
             $request->session()->regenerate();
-
             return redirect()->intended(route('dashboard'));
         }
 
         return back();
+    }
+
+    public function formChangePasswordAdmin()
+    {
+        return view('admin.pages.gantiPassword.formGantiPassword');
+    }
+
+    public function changePasswordAdmin(Request $request)
+    {
+        $request->validate([
+            'passwordSaatIni' => 'required',
+            'password' => 'required|confirmed', Password::min(8),
+        ]);
+
+        if (!Hash::check($request->passwordSaatIni, Auth::user()->password)) {
+            return back();
+        } else {
+            $data = Employees::where('id', Auth::user()->id);
+            $data->update(['password' => Hash::make($request->password)]);
+            return back();
+        }
     }
 
     public function logout()

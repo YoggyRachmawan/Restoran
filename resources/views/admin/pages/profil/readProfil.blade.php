@@ -30,7 +30,8 @@
                                 <p>Email : <span class="text-bold">yoggyrachmawan45@gmail.com</span></p>
                                 <p>Alamat : <span class="text-bold">Jl. Sukamantri 2, Kota Bandung</span></p>
                                 <p>Jabatan : <span class="text-bold">Admin</span></p>
-                                <a type="button" href="/updateProfilAdmin" class="btn btn-secondary">Ubah Data Profil</a>
+                                <a type="button" href="{{ route('editProfilAdmin') }}" class="btn btn-secondary">Ubah Data
+                                    Profil</a>
                             </div>
                         </div>
                     </div>
