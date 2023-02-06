@@ -22,10 +22,11 @@ return new class extends Migration
             $table->string('tempatLahir')->nullable();
             $table->date('tanggalLahir')->nullable();
             $table->enum('jenisKelamin', ['Laki-laki', 'Perempuan'])->nullable();
-            $table->bigInteger('nomorTelepon')->unique()->nullable();
+            $table->string('nomorTelepon')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->text('alamat')->nullable();
             $table->string('password');
+            $table->enum('status', ['on', 'off']);
             $table->timestamps();
         });
     }

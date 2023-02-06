@@ -1,29 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
-use App\Models\Admin\Foods;
-use App\Models\Admin\Drinks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Employees;
 
-class dashboardController extends Controller
+class cashiersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexFoods()
     {
-        $totalKasir     = Employees::where('Fk_Jabatan', 2)->where('status', 'on')->count();
-
-        $totalMakanan   = Foods::where('status', 'on')->count();
-        $totalMinuman   = Drinks::where('status', 'on')->count();
-        $totalMenu      = $totalMakanan + $totalMinuman;
-
-        return view('admin.pages.dashboard.dashboardAdmin', ['kasir' => $totalKasir, 'menu' => $totalMenu]);
+        return view('kasir.pages.menu.menuMakanan');
+    }
+    public function indexDrinks()
+    {
+        return view('kasir.pages.menu.menuMinuman');
     }
 
     /**

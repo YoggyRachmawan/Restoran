@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <form action="{{ route('gantiPasswordAdmin') }}" method="POST">
+                    <form action="{{ route('gantiPassword') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">

@@ -21,8 +21,9 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-        <h3>Email : yoggy@resto.com</h3>
-        <h3>Password : 12345678</h3>
+        <h5>Admin : yoggy@resto.com</h5>
+        <h5>Kasir : wan@resto.com</h5>
+        <h5>Password : 12345678</h5>
         <div class="card card-outline card-secondary">
             <div class="card-header text-center">
                 <h1 class="bi bi-houses-fill mt-2"> Restoran</h1>

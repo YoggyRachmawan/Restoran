@@ -24,8 +24,14 @@ class usersController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+            if (Auth::user()->FK_Jabatan == 1) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('dashboard'));
+            }
+            if (Auth::user()->FK_Jabatan == 2) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('indexMenuMakanan'));
+            }
         }
 
         return back();
@@ -36,7 +42,7 @@ class usersController extends Controller
         return view('admin.pages.gantiPassword.formGantiPassword');
     }
 
-    public function changePasswordAdmin(Request $request)
+    public function changePassword(Request $request)
     {
         $request->validate([
             'passwordSaatIni' => 'required',

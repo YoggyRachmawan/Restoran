@@ -18,14 +18,14 @@
                                 <div class="col-12">
                                     <ul class="nav nav-tabs card-header-tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link {{ request()->is('menuMakanan') ? 'active' : '' }}"
-                                                href="/menuMakanan">
+                                            <a class="nav-link {{ request()->is('MenuMakanan') ? 'active' : '' }}"
+                                                href="{{ route('indexMenuMakanan') }}">
                                                 <label class="bi bi-egg-fried"> Makanan</label>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link {{ request()->is('menuMinuman') ? 'active' : '' }}"
-                                                href="/menuMinuman">
+                                            <a class="nav-link {{ request()->is('MenuMinuman') ? 'active' : '' }}"
+                                                href="{{ route('indexMenuMinuman') }}">
                                                 <label class="bi bi-cup-straw"> Minuman</label>
                                             </a>
                                         </li>

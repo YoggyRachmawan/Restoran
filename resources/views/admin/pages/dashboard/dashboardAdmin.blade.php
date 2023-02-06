@@ -23,7 +23,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Kasir</span>
-                                <span class="info-box-number"></span>
+                                <span class="info-box-number">{{ $kasir }}</span>
                             </div>
                         </div>
                     </div>

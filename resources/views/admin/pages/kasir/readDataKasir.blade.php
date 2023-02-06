@@ -26,10 +26,10 @@
                                 </a>
                             </div>
                             <div class="col-3 ml-auto">
-                                <form action="simple-results.html">
+                                <form action="{{ route('indexDataKasir') }}" method="GET">
                                     <div class="input-group">
-                                        <input type="search" class="form-control form-control-sm"
-                                            placeholder="Mau cari apa?">
+                                        <input type="search" name="search" class="form-control form-control-sm"
+                                            placeholder="Mau cari apa?" autocomplete="off">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-sm btn-secondary">
                                                 <i class="fa fa-search"></i>
@@ -54,31 +54,61 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle">1</td>
-                                    <td class="align-middle">Yoggy</td>
-                                    <td class="align-middle">Laki-laki</td>
-                                    <td class="align-middle">0895801121100</td>
-                                    <td class="align-middle">Kasir</td>
-                                    <td class="align-middle">
-                                        <a type="button" href="/showDataKasir" class="btn btn-xs btn-primary mr-1"
-                                            title="Detail">
-                                            <i class="bi bi-eyeglasses"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-xs btn-danger" title="Hapus">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                @foreach ($data as $index => $list)
+                                    @if ($list->jabatan == 'Kasir' && $list->status == 'on')
+                                        <tr>
+                                            <td class="align-middle">{{ $index + $data->firstItem() }}</td>
+                                            <td class="align-middle">{{ $list->namaPegawai }}</td>
+                                            <td class="align-middle">{{ $list->jenisKelamin }}</td>
+                                            <td class="align-middle">{{ $list->nomorTelepon }}</td>
+                                            <td class="align-middle">{{ $list->jabatan }}</td>
+                                            <td class="align-middle">
+                                                <a type="button" href="{{ route('showDataKasir') }}"
+                                                    class="btn btn-xs btn-primary mr-1" title="Detail">
+                                                    <i class="bi bi-eyeglasses"></i>
+                                                </a>
+                                                <button type="button" data-toggle="modal"
+                                                    data-target="#notifHapus{{ $list->id }}"
+                                                    class="btn btn-xs btn-danger" title="Hapus">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        {{-- Notif Hapus --}}
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="notifHapus{{ $list->id }}" data-backdrop="static"
+                                            data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title bi bi-houses-fill" id="staticBackdropLabel">
+                                                            Restoran</h3>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <h4>Apakah anda yakin mau menghapusnya ?</h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{{ route('destroyDataKasir', $list->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="status" value="off">
+                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                        </form>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tidak</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- //Notif Hapus --}}
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination pagination-sm m-0 mt-4 float-right">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                        </ul>
+                        <div class="mt-4">
+                            {{ $data->links() }}
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

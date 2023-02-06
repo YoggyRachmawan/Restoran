@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\usersController;
 use App\Http\Controllers\Admin\employeesController;
 use App\Http\Controllers\Admin\profilesController;
 use App\Http\Controllers\Admin\reportsController;
+use App\Http\Controllers\Kasir\cashiersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,14 +28,13 @@ Route::post('/masuk', [usersController::class, 'login'])->name('masuk');
 Route::get('/keluar', [usersController::class, 'logout'])->name('keluar');
 Route::get('/FormLupaPassword', [usersController::class, 'formForgotPassword'])->name('formLupaPassword');
 Route::get('/FormGantiPassword', [usersController::class, 'formChangePasswordAdmin'])->name('formGantiPasswordAdmin');
-Route::post('/GantiPassword', [usersController::class, 'changePasswordAdmin'])->name('gantiPasswordAdmin');
+Route::post('/GantiPassword', [usersController::class, 'changePassword'])->name('gantiPassword');
 
 // =======================================================================================================================================================
 
 // =======
 //  ADMIN
 // =======
-
 // Dashboard
 Route::get('/Dashboard', [dashboardController::class, 'index'])->name('dashboard');
 
@@ -46,24 +46,26 @@ Route::get('/FormEditProfilAdmin', [profilesController::class, 'edit'])->name('e
 Route::get('/DataKasir', [employeesController::class, 'index'])->name('indexDataKasir');
 Route::get('/FormDataKasirBaru', [employeesController::class, 'create'])->name('createDataKasir');
 Route::post('/TambahDataKasirBaru', [employeesController::class, 'store'])->name('storeDataKasir');
+Route::get('/DetailDataKasir', [employeesController::class, 'show'])->name('showDataKasir');
+Route::post('/HapusDataKasir/{id}', [employeesController::class, 'destroy'])->name('destroyDataKasir');
 
 // Data Makanan
 Route::get('/DataMakanan', [foodsController::class, 'index'])->name('indexDataMakanan');
 Route::get('/FormDataMakananBaru', [foodsController::class, 'create'])->name('createDataMakanan');
 Route::post('/TambahDataMakananBaru', [foodsController::class, 'store'])->name('storeDataMakanan');
+Route::get('/DetailDataMakanan/{id}', [foodsController::class, 'show'])->name('showDataMakanan');
 Route::get('/FormEditDataMakanan/{id}', [foodsController::class, 'edit'])->name('editDataMakanan');
 Route::post('/UbahDataMakanan/{id}', [foodsController::class, 'update'])->name('updateDataMakanan');
 Route::post('/HapusDataMakanan/{id}', [foodsController::class, 'destroy'])->name('destroyDataMakanan');
-Route::get('/DetailDataMakanan/{id}', [foodsController::class, 'show'])->name('showDataMakanan');
 
 // Data Minuman
 Route::get('/DataMinuman', [drinksController::class, 'index'])->name('indexDataMinuman');
 Route::get('/FormDataMinumanBaru', [drinksController::class, 'create'])->name('createDataMinuman');
 Route::post('/TambahDataMinumanBaru', [drinksController::class, 'store'])->name('storeDataMinuman');
+Route::get('/DetailDataMinuman/{id}', [drinksController::class, 'show'])->name('showDataMinuman');
 Route::get('/FormEditDataMinuman/{id}', [drinksController::class, 'edit'])->name('editDataMinuman');
 Route::post('/UbahDataMinuman/{id}', [drinksController::class, 'update'])->name('updateDataMinuman');
 Route::post('/HapusDataMinuman/{id}', [drinksController::class, 'destroy'])->name('destroyDataMinuman');
-Route::get('/DetailDataMinuman/{id}', [drinksController::class, 'show'])->name('showDataMinuman');
 
 // Data Laporan
 Route::get('/DataLaporan', [reportsController::class, 'index'])->name('indexDataLaporan');
@@ -73,9 +75,5 @@ Route::get('/DataLaporan', [reportsController::class, 'index'])->name('indexData
 // =======
 //  KASIR
 // =======
-Route::get('/menuMakanan', function () {
-    return view('kasir.pages.menu.menuMakanan');
-});
-Route::get('/menuMinuman', function () {
-    return view('kasir.pages.menu.menuMinuman');
-});
+Route::get('/MenuMakanan', [cashiersController::class, 'indexFoods'])->name('indexMenuMakanan');
+Route::get('/MenuMinuman', [cashiersController::class, 'indexDrinks'])->name('indexMenuMinuman');
