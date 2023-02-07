@@ -134,6 +134,6 @@ class foodsController extends Controller
             'status' => $request->status
         ]);
 
-        return redirect()->route('indexDataMakanan')->with('hapus', '1 data makanan berhasil dihapus !');
+        return back()->with('hapus', '1 data makanan berhasil dihapus !');
     }
 }

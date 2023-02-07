@@ -11,22 +11,23 @@
             <div class="modal-body">
                 <div class="row justify-content-around mt-3 mb-3">
                     <div class="col-4">
-                        <img src="img/Yoggy.jpg" class="img-fluid rounded">
+                        <img src="{{ asset('pegawai/' . Auth::user()->fotoPegawai) }}" class="img-fluid rounded">
                     </div>
                     <div class="col-7">
-                        <p>Nama : <span class="text-bold">Yoggy</span></p>
-                        <p>Tempat, Tanggal Lahir : <span class="text-bold">Prabumulih, 10-01-1997</span></p>
-                        <p>Jenis Kelamin : <span class="text-bold">Laki-laki</span></p>
-                        <p>Nomor Telepon : <span class="text-bold">089624735217</span></p>
-                        <p>Email : <span class="text-bold">yoggyrachmawan45@gmail.com</span></p>
-                        <p>Alamat : <span class="text-bold">Jl. Sukamantri 2, Kota Bandung</span></p>
-                        <p>Jabatan : <span class="text-bold">Kasir</span></p>
+                        <p>Nama : <span class="text-bold">{{ Auth::user()->namaPegawai }}</span></p>
+                        <p>Tempat, Tanggal Lahir : <span class="text-bold">{{ Auth::user()->tempatLahir }},
+                                {{ date('d-m-Y', strtotime(Auth::user()->tanggalLahir)) }}</span></p>
+                        <p>Jenis Kelamin : <span class="text-bold">{{ Auth::user()->jenisKelamin }}</span></p>
+                        <p>Nomor Telepon : <span class="text-bold">{{ Auth::user()->nomorTelepon }}</span></p>
+                        <p>Email : <span class="text-bold">{{ Auth::user()->email }}</span></p>
+                        <p>Alamat : <span class="text-bold">{{ Auth::user()->alamat }}</span></p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ubahDataProfil"
-                    data-dismiss="modal"><i class="bi bi-pencil-square"></i> Ubah Data
+                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                    data-target="#ubahDataProfil{{ Auth::user()->id }}" data-dismiss="modal"><i
+                        class="bi bi-pencil-square"></i> Ubah Data
                     Profil</button>
             </div>
         </div>

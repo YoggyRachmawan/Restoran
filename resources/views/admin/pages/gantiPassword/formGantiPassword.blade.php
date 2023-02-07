@@ -16,6 +16,16 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
+                @if ($message = Session::get('berhasil'))
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
+                @endif
+                @if ($message = Session::get('gagal'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
@@ -31,16 +41,27 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <h6>Password Saat Ini</h6>
-                                    <input type="password" class="form-control" name="passwordSaatIni">
+                                    <input type="password"
+                                        class="form-control @error('passwordSaatIni') is-invalid @enderror"
+                                        name="passwordSaatIni">
+                                    @error('passwordSaatIni')
+                                        <small style="color: red;">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <h6>Password Baru</h6>
-                                    <input type="password" class="form-control" name="password">
-                                    <small id="emailHelp" class="form-text text-muted">Password minimal 8 karakter.</small>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        name="password">
+                                    <small id="emailHelp" class="form-text text-muted">Password minimal 8
+                                        karakter.</small>
                                 </div>
                                 <div class="form-group">
                                     <h6>Konfirmasi Password Baru</h6>
-                                    <input type="password" class="form-control" name="password_confirmation">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        name="password_confirmation">
+                                    @error('password')
+                                        <small style="color: red;">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

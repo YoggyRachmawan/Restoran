@@ -16,6 +16,16 @@
         <!-- Main content -->
         <div class="content text-xs">
             <div class="container-fluid">
+                @if ($message = Session::get('berhasil'))
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
+                @endif
+                @if ($message = Session::get('hapus'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ $message }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -49,21 +59,24 @@
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Nomor Telepon</th>
-                                    <th>Jabatan</th>
+                                    <th>Email</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
                                 @foreach ($data as $index => $list)
-                                    @if ($list->jabatan == 'Kasir' && $list->status == 'on')
+                                    @if ($list->FK_Jabatan == 2)
                                         <tr>
-                                            <td class="align-middle">{{ $index + $data->firstItem() }}</td>
+                                            <td class="align-middle">{{ $no++ }}</td>
                                             <td class="align-middle">{{ $list->namaPegawai }}</td>
                                             <td class="align-middle">{{ $list->jenisKelamin }}</td>
                                             <td class="align-middle">{{ $list->nomorTelepon }}</td>
-                                            <td class="align-middle">{{ $list->jabatan }}</td>
+                                            <td class="align-middle">{{ $list->email }}</td>
                                             <td class="align-middle">
-                                                <a type="button" href="{{ route('showDataKasir') }}"
+                                                <a type="button" href="{{ route('showDataKasir', $list->id) }}}"
                                                     class="btn btn-xs btn-primary mr-1" title="Detail">
                                                     <i class="bi bi-eyeglasses"></i>
                                                 </a>
@@ -106,9 +119,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="mt-4">
-                            {{ $data->links() }}
-                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Employees;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
-use Illuminate\Validation\Rules\Password;
 
 class employeesController extends Controller
 {
@@ -18,16 +17,14 @@ class employeesController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $list = Employees::select('employees.id', 'jabatan', 'fotoPegawai', 'namaPegawai', 'tempatLahir', 'tanggalLahir', 'jenisKelamin', 'nomorTelepon', 'email', 'alamat', 'status')
-                ->join('positions', 'employees.FK_Jabatan', '=', 'positions.id')
-                ->where('namaPegawai', 'LIKE', '%' . $request->search . '%')
+            $list = Employees::where('namaPegawai', 'LIKE', '%' . $request->search . '%')
+                ->where('status', 'on')
                 ->orderBy('employees.updated_at', 'DESC')
-                ->paginate(3);
+                ->get();
         } else {
-            $list = Employees::select('employees.id', 'jabatan', 'fotoPegawai', 'namaPegawai', 'tempatLahir', 'tanggalLahir', 'jenisKelamin', 'nomorTelepon', 'email', 'alamat', 'status')
-                ->join('positions', 'employees.FK_Jabatan', '=', 'positions.id')
+            $list = Employees::where('status', 'on')
                 ->orderBy('employees.updated_at', 'DESC')
-                ->paginate(3);
+                ->get();
         }
         return view('admin.pages.Kasir.readDataKasir', ['data' => $list]);
     }
@@ -57,11 +54,25 @@ class employeesController extends Controller
             'tempatLahir'   => 'required',
             'tanggalLahir'  => 'required|date',
             'jenisKelamin'  => 'required',
-            'nomorTelepon'  => 'required',
+            'nomorTelepon'  => 'required|numeric',
             'email'         => 'required',
             'alamat'        => 'required',
-            'password'      => 'required|confirmed', Password::min(3),
+            'password'      => 'required|confirmed|min:8',
             'status'        => 'required'
+        ], [
+            'fotoPegawai.required'      => 'Tolong masukkan foto !',
+            'fotoPegawai.image'         => 'Format foto hanya jpg, jpeg dan png !',
+            'namaPegawai.required'      => 'Tolong masukkan nama !',
+            'tempatLahir.required'      => 'Tolong masukkan tempat lahir !',
+            'tanggalLahir.required'     => 'Tolong masukkan tanggal lahir !',
+            'jenisKelamin.required'     => 'Tolong pilih jenis kelamin !',
+            'nomorTelepon.required'     => 'Tolong masukkan nomor telepon !',
+            'nomorTelepon.numeric'      => 'Tolong hanya masukkan angka !',
+            'email.required'            => 'Tolong masukkan email !',
+            'alamat.required'           => 'Tolong masukkan alamat !',
+            'password.required'         => 'Tolong masukkan password !',
+            'password.confirmed'        => 'Konfirmasi password anda tidak sesuai !',
+            'password.min:8'            => 'Masukkan password minimal 8 karakter !'
         ]);
 
         $data = Employees::create([
@@ -83,7 +94,7 @@ class employeesController extends Controller
             $data->save();
         }
 
-        return redirect()->route('indexDataKasir');
+        return redirect()->route('indexDataKasir')->with('berhasil', '1 kasir baru berhasil ditambahkan !');
     }
 
     /**
@@ -93,32 +104,12 @@ class employeesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show()
+    public function show($id)
     {
-        return view('admin.pages.Kasir.showDataKasir');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $data = Employees::select('fotoPegawai', 'namaPegawai', 'tempatLahir', 'tanggalLahir', 'jenisKelamin', 'nomorTelepon', 'email', 'alamat', 'jabatan', 'employees.created_at', 'employees.updated_at')
+            ->join('positions', 'employees.FK_Jabatan', '=', 'positions.id')
+            ->find($id);
+        return view('admin.pages.Kasir.showDataKasir', ['data' => $data]);
     }
 
     /**
@@ -127,12 +118,13 @@ class employeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Request $request, $id)
     {
         $data = Employees::find($id);
         $data->update([
             'status' => $request->status
         ]);
-        return back();
+        return back()->with('hapus', '1 kasir berhasil dihapus !');
     }
 }

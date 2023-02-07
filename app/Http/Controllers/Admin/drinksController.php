@@ -17,9 +17,14 @@ class drinksController extends Controller
     {
 
         if ($request->has('search')) {
-            $list = Drinks::where('namaMinuman', 'LIKE', '%' . $request->search . '%')->where('status', 'on')->orderBy('updated_at', 'DESC')->paginate(3);
+            $list = Drinks::where('namaMinuman', 'LIKE', '%' . $request->search . '%')
+                ->where('status', 'on')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(3);
         } else {
-            $list = Drinks::where('status', 'on')->orderBy('updated_at', 'DESC')->paginate(3);
+            $list = Drinks::where('status', 'on')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(3);
         }
         return view('admin.pages.menu.dataMinuman.readDataMinuman', ['data' => $list]);
     }
@@ -135,6 +140,6 @@ class drinksController extends Controller
             'status' => $request->status
         ]);
 
-        return redirect()->route('indexDataMinuman')->with('hapus', '1 data Minuman berhasil dihapus !');
+        return back()->with('hapus', '1 data Minuman berhasil dihapus !');
     }
 }

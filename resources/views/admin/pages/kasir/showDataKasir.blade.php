@@ -22,7 +22,7 @@
                                 <h5 class="card-title">Detail Data Kasir</h5>
                             </div>
                             <div class="col-1 ml-auto text-right">
-                                <a type="button" href="/readDataKasir" class="btn btn-sm" title="Tutup">
+                                <a type="button" href="{{ route('indexDataKasir') }}" class="btn btn-sm" title="Tutup">
                                     <i class="bi bi-x-square"></i>
                                 </a>
                             </div>
@@ -32,18 +32,20 @@
                     <div class="card-body">
                         <div class="row justify-content-around mt-3 mb-3">
                             <div class="col-4">
-                                <img src="img/Yoggy.jpg" class="img-fluid rounded">
+                                <img src="{{ asset('Pegawai/' . $data->fotoPegawai) }}" class="img-fluid rounded">
                             </div>
                             <div class="col-7">
-                                <p>Nama : <span class="text-bold">Yoggy</span></p>
-                                <p>Tempat, Tanggal Lahir : <span class="text-bold">Prabumulih, 10-01-1997</span></p>
-                                <p>Jenis Kelamin : <span class="text-bold">Laki-laki</span></p>
-                                <p>Nomor Telepon : <span class="text-bold">0895801121100</span></p>
-                                <p>Email : <span class="text-bold">yoggy45@gmail.com</span></p>
-                                <p>Alamat : <span class="text-bold">Jl. Sukamantri 2, Kota Bandung</span></p>
-                                <p>Jabatan : <span class="text-bold">Kasir</span></p>
-                                <p>Tanggal Daftar : <span class="text-bold">05-01-2023</span></p>
-                                <p>Tanggal Ubah : <span class="text-bold">05-01-2023</span></p>
+                                <p>Nama : <span class="text-bold">{{ $data->namaPegawai }}</span></p>
+                                <p>Tempat, Tanggal Lahir : <span class="text-bold">{{ $data->tempatLahir }},
+                                        {{ date('d-m-Y', strtotime($data->tanggalLahir)) }}</span></p>
+                                <p>Jenis Kelamin : <span class="text-bold">{{ $data->jenisKelamin }}</span></p>
+                                <p>Nomor Telepon : <span class="text-bold">{{ $data->nomorTelepon }}</span></p>
+                                <p>Email : <span class="text-bold">{{ $data->email }}</span></p>
+                                <p>Alamat : <span class="text-bold">{{ $data->alamat }}</span></p>
+                                <p>Tanggal Daftar : <span class="text-bold">{{ $data->created_at->format('d-m-Y') }}</span>
+                                </p>
+                                <p>Tanggal Ubah : <span class="text-bold">{{ $data->updated_at->format('d-m-Y') }}</span>
+                                </p>
                             </div>
                         </div>
                     </div>

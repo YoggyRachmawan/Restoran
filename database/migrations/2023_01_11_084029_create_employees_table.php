@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('FK_Jabatan')->nullable();
+            $table->unsignedBigInteger('FK_Jabatan');
             $table->foreign('FK_Jabatan')->references('id')->on('positions')->cascadeOnUpdate()->restrictOnDelete();
             $table->string('fotoPegawai')->nullable();
-            $table->string('namaPegawai')->nullable();
-            $table->string('tempatLahir')->nullable();
-            $table->date('tanggalLahir')->nullable();
-            $table->enum('jenisKelamin', ['Laki-laki', 'Perempuan'])->nullable();
-            $table->string('nomorTelepon')->unique()->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->text('alamat')->nullable();
+            $table->string('namaPegawai');
+            $table->string('tempatLahir');
+            $table->date('tanggalLahir');
+            $table->enum('jenisKelamin', ['Laki-laki', 'Perempuan']);
+            $table->string('nomorTelepon');
+            $table->string('email');
+            $table->text('alamat');
             $table->string('password');
             $table->enum('status', ['on', 'off']);
             $table->timestamps();

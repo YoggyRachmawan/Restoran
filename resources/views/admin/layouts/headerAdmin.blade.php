@@ -7,13 +7,13 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="{{ asset('img/Yoggy.jpg') }}" class="img-circle" width="25">
+                <img src="{{ asset('pegawai/' . Auth::user()->fotoPegawai) }}" class="img-circle" width="25">
             </a>
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <span class="dropdown-header">Admin | Yoggy Rachmawan</span>
+                <span class="dropdown-header">Admin | {{ Auth::user()->namaPegawai }}</span>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('indexProfilAdmin') }}"
-                    class="dropdown-item {{ request()->is('ProfilAdmin', 'FormEditProfilAdmin') ? 'active' : '' }}">
+                    class="dropdown-item {{ request()->is('ProfilAdmin', 'FormEditProfilAdmin*') ? 'active' : '' }}">
                     <i class="bi bi-person-lines-fill"></i> Profil saya
                 </a>
                 <div class="dropdown-divider"></div>

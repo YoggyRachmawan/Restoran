@@ -7,6 +7,16 @@
     <!-- Main content -->
     <div class="content">
         <div class="container">
+            @if ($message = Session::get('berhasil'))
+                <div class="alert alert-success" role="alert">
+                    {{ $message }}
+                </div>
+            @endif
+            @if ($message = Session::get('gagal'))
+                <div class="alert alert-danger" role="alert">
+                    {{ $message }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-7">
                     <div class="card text-center">
@@ -57,7 +67,7 @@
                             <h5 class="bi bi-journal-text card-title m-0"> Nota</h5>
                         </div>
                         <div class="card-body">
-                            <h6><span class="text-bold">ID Transaksi :</span> RST08141</h6>
+                            <h6><span class="text-bold">ID Transaksi :</span> RST</h6>
                             <h6><span class="text-bold">Tanggal Transaksi :</span> {{ date('d-m-Y') }}</h6>
                             <table class="table table-bordered mt-3 mb-3">
                                 <thead class="thead-light">
@@ -70,28 +80,18 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="align-middle">Mie Goreng Kosan</td>
-                                        <td class="align-middle text-center">1</td>
-                                        <td class="align-middle">Rp 10.000</td>
+                                        <td class="align-middle"></td>
+                                        <td class="align-middle text-center"></td>
+                                        <td class="align-middle"></td>
                                         <td class="text-center">
-                                            <a href="#" class="btn" title="Hapus">
+                                            {{-- <a href="#" class="btn" title="Hapus">
                                                 <i class="bi bi-x-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle">Jus Jeruk</td>
-                                        <td class="align-middle text-center">1</td>
-                                        <td class="align-middle">Rp 8.000</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn" title="Hapus">
-                                                <i class="bi bi-x-circle"></i>
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <h1 class="text-center">Total Harga : <span class="text-bold">Rp 18.000</span></h1>
+                            <h1 class="text-center">Total Harga : <span class="text-bold"></span></h1>
                             <label class="text-xs">Catatan</label>
                             <ul class="text-xs">
                                 <li>

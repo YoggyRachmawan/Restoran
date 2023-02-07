@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Employees;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
 class usersController extends Controller
 {
@@ -19,8 +18,8 @@ class usersController extends Controller
     public function login(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required',
         ]);
 
         if (Auth::attempt($validated)) {
@@ -45,16 +44,21 @@ class usersController extends Controller
     public function changePassword(Request $request)
     {
         $request->validate([
-            'passwordSaatIni' => 'required',
-            'password' => 'required|confirmed', Password::min(8),
+            'passwordSaatIni'   => 'required',
+            'password'          => 'required|confirmed|min:8'
+        ], [
+            'passwordSaatIni.required'  => 'Tolong masukkan password anda saat ini !',
+            'password.required'         => 'Tolong masukkan password baru anda !',
+            'password.confirmed'        => 'Konfirmasi password anda tidak sesuai !',
+            'password.min:8'            => 'Masukkan password minimal 8 karakter !'
         ]);
 
         if (!Hash::check($request->passwordSaatIni, Auth::user()->password)) {
-            return back();
+            return back()->with('gagal', 'Password anda gagal diubah !');
         } else {
             $data = Employees::where('id', Auth::user()->id);
             $data->update(['password' => Hash::make($request->password)]);
-            return back();
+            return back()->with('berhasil', 'Password anda berhasil diubah !');
         }
     }
 
